@@ -29,7 +29,8 @@ class GatingWidget():
         m = m[:, 0]
 
         plt.plot(time, m, time, 0*time + a/(a+b))
-        plt.xlabel('Time [ms]')
+        plt.xlabel('time [ms]')
+        plt.ylabel((r'$m(t)$, $m_{\infty}$ (ratio)'))
         plt.legend((r'$m(t)$',r'$m_{\infty}$'));
         plt.ylim(0, 1)
         plt.show()
@@ -38,26 +39,38 @@ class GatingWidget():
 ####################   Exercise 2   #################### 
 ########################################################
 
-
-
 def plot_voltage_dependence(Va0, da, Vb0, db):
-    
     V = np.linspace(-100, 100, num=1000)
-    a = np.exp((V-Va0)/da)
-    b = np.exp((V-Vb0)/db)
+    a = np.exp((V - Va0) / da)
+    b = np.exp((V - Vb0) / db)
 
-    plt.rcParams["figure.figsize"] = (12,5)
+    # Create subplots
+    fig, axs = plt.subplots(1, 3, figsize=(12, 5))
     plt.rcParams["font.size"] = 16
-    plt.subplot(1,3,1)
-    plt.plot(V, a, V, b)
-    plt.legend((r'$\alpha_m$',r'$\beta_m$'));
-    plt.ylim(0, 5)
-    plt.subplot(1,3,2)
-    plt.plot(V, a/(a+b),'k')
-    plt.title(r'$m_{\infty}$')
-    plt.subplot(1,3,3)
-    plt.plot(V, 1/(a+b),'k')
-    plt.title(r'$\tau_m$')
+
+    # Plot 1: alpha and beta
+    axs[0].plot(V, a, label=r'$\alpha_m$')
+    axs[0].plot(V, b, label=r'$\beta_m$')
+    axs[0].legend()
+    axs[0].set_ylim(0, 5)
+    axs[0].set_title('Rate Constants')
+    axs[0].set_xlabel('Voltage (mV)')
+    axs[0].set_ylabel('Rate (1/ms)')
+
+    # Plot 2: m_inf
+    axs[1].plot(V, a / (a + b), 'k')
+    axs[1].set_title(r'$m_{\infty}$')
+    axs[1].set_xlabel('Voltage (mV)')
+    axs[1].set_ylabel('Steady-State Activation')
+
+    # Plot 3: tau_m
+    axs[2].plot(V, 1 / (a + b), 'k')
+    axs[2].set_title(r'$\tau_m$')
+    axs[2].set_xlabel('Voltage (mV)')
+    axs[2].set_ylabel('Time Constant (ms)')
+
+    # Layout and show
+    plt.tight_layout()
     plt.show()
 
 
@@ -102,7 +115,8 @@ class ConstantConductancesWidget():
         # Potential Plot
         plt.plot(time, V, time, time*0 + self.E_Na, time, time*0 + self.E_K)
         plt.legend(['$V$','$E_{Na}$','$E_{K}$'], loc = "center right")
-        plt.ylabel('Mem. Potential [mV]')
+        plt.ylabel('V [mV]')
+        plt.xlabel('time (ms)')
         plt.grid()
         plt.show()
         
@@ -148,34 +162,53 @@ class VoltageDependentConductancesWidget():
         return (-self.I_app(t)-self.I_Na(V)-self.I_K(V))/self.Cm
 
     def solve_and_plot(self, V0, I_amp, Vs, d):
-        self.V0 = V0;
+        # Store input parameters
+        self.V0 = V0
         self.I_amp = I_amp
         self.Vs = Vs
         self.d = d
+
+        # Time domain simulation
         time = np.arange(0, 10, 0.01)
+        V_time = odeint(self.dV_dt, V0, time)[:, 0]
 
-        V = odeint(self.dV_dt, V0, time)
-        V = V[:, 0]
-        # Potential Plot
-        plt.subplot(1,3,1)
-        plt.plot(time, V, time, time*0 + self.E_Na, time, time*0 + self.E_K)
-        plt.legend(['$V$','$E_{Na}$','$E_{K}$'], loc = "center right")
-        plt.title(r'$V(t)$')
-        V = np.linspace(-100, 100, num=1000)
-        m_ss =  self.m_inf(V)
-        plt.subplot(1,3,2)
-        plt.plot(V, m_ss)
-        plt.title(r'$m_{\infty}$')
+        # Voltage sweep for steady-state and I(V) plots
+        V_sweep = np.linspace(-100, 100, num=1000)
+        m_ss = self.m_inf(V_sweep)
+        I_total = -self.I_Na(V_sweep) - self.I_K(V_sweep)
 
-        plt.subplot(1,3,3)
-        I = -self.I_Na(V)-self.I_K(V)
-        plt.plot(V, I)
-        plt.title(r'$I(V) =  - I_{\rm Na}(V) - I_{\rm K}(V)$')
-        plt.ylim(-10, 10)
+        # Create 1x3 subplot grid
+        fig, axs = plt.subplots(1, 3, figsize=(14, 4))
 
-        
-        plt.grid()
+        # Subplot 1: V(t)
+        axs[0].plot(time, V_time, label='$V$')
+        axs[0].plot(time, np.full_like(time, self.E_Na), label='$E_{Na}$')
+        axs[0].plot(time, np.full_like(time, self.E_K), label='$E_{K}$')
+        axs[0].legend(loc="center right")
+        axs[0].set_title(r'$V(t)$')
+        axs[0].set_xlabel('Time (ms)')
+        axs[0].set_ylabel('V (mV)')
+
+        # Subplot 2: m_inf(V)
+        axs[1].plot(V_sweep, m_ss)
+        axs[1].set_title(r'$m_{\infty}$')
+        axs[1].set_xlabel('V (mV)')
+        axs[1].set_ylabel(r'$m_{\infty}$')
+
+        # Subplot 3: I(V)
+        axs[2].plot(V_sweep, I_total)
+        axs[2].set_title(r'$I(V) = - I_{\rm Na}(V) - I_{\rm K}(V)$')
+        axs[2].set_xlabel('V (mV)')
+        axs[2].set_ylabel('Total current (A/F)')
+        axs[2].set_ylim(-10, 10)
+
+        # Enable grid and adjust layout
+        for ax in axs:
+            ax.grid(True)
+
+        plt.tight_layout()
         plt.show()
+
         
 
     def __init__(self):
@@ -359,25 +392,34 @@ def plot_scalar(V, color = 'b'):
     
 def plot_two_solutions(time, V1, h1, V2, h2):
     
-    plt.rcParams["figure.figsize"] = (14,5)
-    plt.figure(1)
-    plt.clf()
-    plt.subplot(1,3,1)
-    plt.plot(time, V1, time, V2)
-    plt.xlim(-1,time[-1])
-    plt.title(r'$V(t)$')
-    plt.legend(['stable','cyclic'])
+    fig, axs = plt.subplots(1, 3, figsize=(14, 5))
+    fig.clf()  # Clear figure if re-running in notebook
+    fig, axs = plt.subplots(1, 3, figsize=(14, 5))  # Recreate subplots
 
-    plt.subplot(1,3,2)
-    plt.plot(time, h1, time, h2)
-    plt.title(r'$h(t)$')
+    # Subplot 1: V(t)
+    axs[0].plot(time, V1, time, V2)
+    axs[0].set_xlim(-1, time[-1])
+    axs[0].set_title(r'$V(t)$')
+    axs[0].set_xlabel('Time (ms)')
+    axs[0].set_ylabel('Membrane Potential (mV)')
+    axs[0].legend(['stable', 'cyclic'])
 
-    plt.subplot(1,3,3)
-    plt.plot(V1, h1,V2, h2)
-    plt.xlabel(r'$V(t)$')
-    plt.ylabel(r'$h(t)$')
+    # Subplot 2: h(t)
+    axs[1].plot(time, h1, time, h2)
+    axs[1].set_title(r'$h(t)$')
+    axs[1].set_xlabel('Time (ms)')
+    axs[1].set_ylabel('Inactivation Variable (ratio)')
+
+    # Subplot 3: Phase Plane
+    axs[2].plot(V1, h1, V2, h2)
+    axs[2].set_xlabel(r'$V(t)$')
+    axs[2].set_ylabel(r'$h(t)$')
+    axs[2].set_title('Phase Plane')
+
+    # Adjust layout and save
+    plt.tight_layout()
     plt.savefig('phase.pdf')
-    #plt.show()
+    # plt.show()
 
 
 def get_nullclines(Vp):
@@ -391,44 +433,54 @@ def solve_and_plot(V0, h0, Vam, Vbm, Vah, Vbh):
 
     time = np.arange(0, 15, 0.001)
     V, h = solve(time, V0, h0, Vam, Vbm, Vah, Vbh)
-    # Potential Plot
-    plt.subplot(2,2,1)
-    plt.plot(time, V, time, time*0 + E_Na, time, time*0 + E_K)
-    plt.legend(['$V$','$E_{Na}$','$E_{K}$'], loc = "center right")
-    plt.title(r'$V(t)$')
 
-    plt.subplot(2,2,2)
-    plt.plot(time, h)
-    plt.ylim(0,1)
-    plt.title(r'$h(t)$')
+    # Create 2x2 subplot grid
+    fig, axs = plt.subplots(2, 2, figsize=(10, 8))
 
+    # Plot 1: V(t)
+    axs[0, 0].plot(time, V, time, time*0 + E_Na, time, time*0 + E_K)
+    axs[0, 0].legend(['$V$', '$E_{Na}$', '$E_{K}$'], loc="center right")
+    axs[0, 0].set_xlabel('Time (ms)')
+    axs[0, 0].set_ylabel('V (mV)')
+    axs[0, 0].set_title(r'$V(t)$')
 
-    plt.subplot(2,2,3)
-    Vp = np.linspace(E_K-1, E_Na+1, num=1000)
+    # Plot 2: h(t)
+    axs[0, 1].plot(time, h)
+    axs[0, 1].set_ylim(0, 1)
+    axs[0, 1].set_xlabel('Time (ms)')
+    axs[0, 1].set_ylabel('h (ratio)')
+    axs[0, 1].set_title(r'$h(t)$')
+
+    # Plot 3: Nullclines
+    Vp = np.linspace(E_K - 1, E_Na + 1, num=1000)
     V_null, h_null = get_nullclines(Vp)
-    plt.plot(Vp, V_null, Vp, h_null)
-    plt.legend(['$\dot{V}=0$','$\dot{h}=0$'])
-    plt.ylim(-0.2,1.2); 
-    #plt.ylim(0.1,0.25); #zoom
+    axs[1, 0].plot(Vp, V_null, Vp, h_null)
+    axs[1, 0].legend(['$\dot{V}=0$', '$\dot{h}=0$'])
+    axs[1, 0].set_ylim(-0.2, 1.2)
+    axs[1, 0].set_xlabel('V (mV)')  # Custom label
+    axs[1, 0].set_ylabel('Nullclines')
 
-    plt.subplot(2,2,4)
-    dV_dt =  dVdt_scalar(Vp)
-    m_ss =  m_inf(Vp)
-    h_ss =  h_inf(Vp)
-    
-    mh_max = max(m_ss*h_ss);
-    I_Na_full = g_Na*mh_max*(Vp - E_Na)
-    I_K_full = g_K*(Vp - E_K)
-    plt.plot(Vp, C_m*dV_dt, 'b', Vp,  -I_K_full, 'k', Vp,  -I_Na_full -I_K_full,'r')
-    #plt.ylim(-0.2,1.2);
-    plt.grid()
+    # Plot 4: Currents and dV/dt
+    dV_dt = dVdt_scalar(Vp)
+    m_ss = m_inf(Vp)
+    h_ss = h_inf(Vp)
+    mh_max = max(m_ss * h_ss)
+    I_Na_full = g_Na * mh_max * (Vp - E_Na)
+    I_K_full = g_K * (Vp - E_K)
+    axs[1, 1].plot(Vp, C_m * dV_dt, 'b', Vp, -I_K_full, 'k', Vp, -I_Na_full - I_K_full, 'r')
+    axs[1, 1].set_xlabel('Membrane Voltage (mV)')  # Another custom x-label
+    axs[1, 1].set_ylabel('Current (μA/cm²)')
+    axs[1, 1].grid(True)
+
+    # Layout adjustment
+    plt.tight_layout()
     plt.show()
 
     from IPython.display import display, Math
     for V0 in range(-80,-40,10):
         lambda_max, V_eq, h_eq = check_stability(V0)
         if h_eq>-1:
-            display(Math(r'V_{{\mbox{{guess}}}}={:.1f},  V_{{\mbox{{eq}}}}={:.1f},  h_{{\mbox{{eq}}}}={:.3f}, \lambda_{{\max}}={:.3f}'.format(V0,  V_eq, h_eq, lambda_max)))
+            display(Math(r'V_{{\text{{guess}}}}={:.1f},  V_{{\text{{eq}}}}={:.1f},  h_{{\text{{eq}}}}={:.3f}, \lambda_{{\max}}={:.3f}'.format(V0,  V_eq, h_eq, lambda_max)))
 
 def ap_widget():
         

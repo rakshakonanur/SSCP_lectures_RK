@@ -8,18 +8,18 @@ class Markov_Widget():
     
     def __init__ (self):
         interact(self.solve_and_plot,
-                 P1 = FloatSlider(value=45, min=0, max=100, step=1, description='$P1$', continuous_update=False),
-                 P2 = FloatSlider(value=20, min=0, max=100, step=1, description='$P2$', continuous_update=False),
-                 P3 = FloatSlider(value=65, min=0, max=100, step=1, description='$P3$', continuous_update=False),
-                 P4 = FloatSlider(value=50, min=0, max=100, step=1, description='$P4$', continuous_update=False),
-                 P5 = FloatSlider(value=20, min=0, max=100, step=1, description='$P5$', continuous_update=False),
-                 P6 = FloatSlider(value=15, min=0, max=50, step=1, description='$P6$', continuous_update=False),
-                 P7 = FloatSlider(value=1.0, min=0, max=5, step=0.1, description='$P7$', continuous_update=False),
-                 P8 = FloatSlider(value=0.023, min=0, max=2, step=0.01, description='$P8$', continuous_update=False),
-                 P9 = FloatSlider(value=29, min=0, max=100, step=1, description='$P9$', continuous_update=False),
-                 P10 = FloatSlider(value=15, min=0, max=50, step=1, description='$P10$', continuous_update=False),
-                 P11 = FloatSlider(value=2e-5, min=0, max=1, step=1e-6, description='$k1$', continuous_update=False),
-                 P12 = FloatSlider(value=2e-5, min=0, max=1, step=1e-6, description='$k2$', continuous_update=False),
+                 P1 = FloatSlider(value=45, min=0, max=100, step=1, description='P1', continuous_update=False),
+                 P2 = FloatSlider(value=20, min=0, max=100, step=1, description='P2', continuous_update=False),
+                 P3 = FloatSlider(value=65, min=0, max=100, step=1, description='P3', continuous_update=False),
+                 P4 = FloatSlider(value=50, min=0, max=100, step=1, description='P4', continuous_update=False),
+                 P5 = FloatSlider(value=20, min=0, max=100, step=1, description='P5', continuous_update=False),
+                 P6 = FloatSlider(value=15, min=0, max=50, step=1, description='P6', continuous_update=False),
+                 P7 = FloatSlider(value=1.0, min=0, max=5, step=0.1, description='P7', continuous_update=False),
+                 P8 = FloatSlider(value=0.023, min=0, max=2, step=0.01, description='P8', continuous_update=False),
+                 P9 = FloatSlider(value=29, min=0, max=100, step=1, description='P9', continuous_update=False),
+                 P10 = FloatSlider(value=15, min=0, max=50, step=1, description='P10', continuous_update=False),
+                 P11 = FloatSlider(value=2e-5, min=0, max=1, step=1e-6, description='k1', continuous_update=False),
+                 P12 = FloatSlider(value=2e-5, min=0, max=1, step=1e-6, description='k2', continuous_update=False),
                  P13 = FloatSlider(value=0.5, min=0, max=3, step=0.1, description='gK', continuous_update=False))
 
     def solve_and_plot(self,P1, P2, P3, P4, P5, P6, P7, P8, P9, P10, P11, P12, P13):

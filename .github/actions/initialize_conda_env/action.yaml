@@ -13,9 +13,8 @@ runs:
     # cache ref https://github.com/conda-incubator/setup-miniconda#caching-packages
 
     - name: Setup conda-forge
-      uses: conda-incubator/setup-miniconda@v2
+      uses: conda-incubator/setup-miniconda@v3
       with:
-          miniforge-variant: Mambaforge
           miniforge-version: latest
           activate-environment: sscp-env
           python-version: ${{ inputs.python-version }}

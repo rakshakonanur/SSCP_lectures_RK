@@ -66,13 +66,13 @@ class GuccioneMaterial:
               + bfs*(E12**2 + E21**2 + E13**2 + E31**2)
 
         # passive strain energy
-        Wpassive = CC/2.0 * (exp(Q) - 1)
+        Wpassive = CC/2.0 * (exp(Q) - 1) # from Guccione model
 
         # active strain energy
         if params['Tactive'] is not None :
             self.Tactive = Constant(params['Tactive'], name='Tactive')
             I4 = inner(C*e1, e1)
-            Wactive = self.Tactive/2.0 * (I4 - 1)
+            Wactive = self.Tactive/2.0 * (I4 - 1) # active muscle contraction, set to none if not wanted
         else :
             Wactive = 0.0
 
@@ -81,7 +81,7 @@ class GuccioneMaterial:
             kappa = Constant(params['kappa'], name='kappa')
             Winc = kappa * (J*ln(J) -J +1) 
         else :
-            Winc = - p * (J - 1)
+            Winc = - p * (J - 1) # incompressibility component
         
         return Wpassive + Wactive + Winc
 

@@ -1,6 +1,7 @@
 # SUURPh-summer-school
 
-Cloned from original repo- contains some annotations
+Cloned from original repo- contains some annotations.
+(while available) can access the jupyter online server at : https://sscp.minrk.net/
 
 This is the web-page of the Simula Summer School in Computational Physiology
 

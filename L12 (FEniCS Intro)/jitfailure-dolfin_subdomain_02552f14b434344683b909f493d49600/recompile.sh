@@ -1,0 +1,3 @@
+#!/bin/bash
+# Execute this file to recompile locally
+/opt/pixi/.pixi/envs/default/bin/x86_64-conda-linux-gnu-c++ -Wall -shared -fPIC -std=c++11 -O3 -fno-math-errno -fno-trapping-math -ffinite-math-only -I/opt/pixi/.pixi/envs/default/include -I/opt/pixi/.pixi/envs/default/include/eigen3 -I/tmp/dijitso-cache/include dolfin_subdomain_02552f14b434344683b909f493d49600.cpp -L/opt/pixi/.pixi/envs/default/lib -L/opt/pixi/.pixi/envs/default/x86_64-conda-linux-gnu/sysroot/usr/lib -L/tmp/dijitso-cache/lib -Wl,-rpath,/tmp/dijitso-cache/lib -lmpi -lmpicxx -lpetsc -lslepc -lm -ldl -lz -lsz -lpthread -lcurl -lcrypto -lhdf5 -lboost_timer -ldolfin -olibdijitso-dolfin_subdomain_02552f14b434344683b909f493d49600.so

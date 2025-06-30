@@ -1,0 +1,21 @@
+name: Install dependencies
+
+inputs:
+  python-version:
+    description: Python version to install
+    required: true
+    type: string
+    default: "3.12"
+
+runs:
+  using: composite
+  steps:
+    # cache ref https://github.com/conda-incubator/setup-miniconda#caching-packages
+
+    - name: Setup conda env
+      uses: prefix-dev/setup-pixi@v0.8.10
+      with:
+        pixi-version: v0.44.0
+        # building cache is slower than not caching
+        cache: false
+

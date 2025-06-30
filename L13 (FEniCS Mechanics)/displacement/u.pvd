@@ -1,0 +1,97 @@
+<?xml version="1.0"?>
+<Xdmf Version="3.0">
+  <Domain>
+    <Grid GridType="Collection" CollectionType="Temporal" Name="Displacement">
+      <Grid Name="Displacement_0" GridType="Uniform">
+        <Topology NumberOfElements="384" TopologyType="Tetrahedron" NodesPerElement="4">
+          <DataItem Dimensions="384 4" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_0/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XYZ">
+          <DataItem Dimensions="125 3" Format="HDF">u.h5:Displacement/Displacement_0/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="0.000000000000000e+00" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="CG" ElementDegree="2" ElementCell="tetrahedron" Name="Displacement" Center="Other" AttributeType="Vector">
+          <DataItem Dimensions="11520 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_0/cell_dofs</DataItem>
+          <DataItem Dimensions="2187 1" NumberType="Float" Format="HDF">u.h5:Displacement/Displacement_0/vector</DataItem>
+          <DataItem Dimensions="385 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_0/x_cell_dofs</DataItem>
+          <DataItem Dimensions="384 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_0/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="Displacement_1" GridType="Uniform">
+        <Topology NumberOfElements="384" TopologyType="Tetrahedron" NodesPerElement="4">
+          <DataItem Dimensions="384 4" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_1/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XYZ">
+          <DataItem Dimensions="125 3" Format="HDF">u.h5:Displacement/Displacement_1/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="1.000000000000000e+00" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="CG" ElementDegree="2" ElementCell="tetrahedron" Name="Displacement" Center="Other" AttributeType="Vector">
+          <DataItem Dimensions="11520 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_1/cell_dofs</DataItem>
+          <DataItem Dimensions="2187 1" NumberType="Float" Format="HDF">u.h5:Displacement/Displacement_1/vector</DataItem>
+          <DataItem Dimensions="385 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_1/x_cell_dofs</DataItem>
+          <DataItem Dimensions="384 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_1/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="Displacement_2" GridType="Uniform">
+        <Topology NumberOfElements="384" TopologyType="Tetrahedron" NodesPerElement="4">
+          <DataItem Dimensions="384 4" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_2/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XYZ">
+          <DataItem Dimensions="125 3" Format="HDF">u.h5:Displacement/Displacement_2/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="2.000000000000000e+00" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="CG" ElementDegree="2" ElementCell="tetrahedron" Name="Displacement" Center="Other" AttributeType="Vector">
+          <DataItem Dimensions="11520 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_2/cell_dofs</DataItem>
+          <DataItem Dimensions="2187 1" NumberType="Float" Format="HDF">u.h5:Displacement/Displacement_2/vector</DataItem>
+          <DataItem Dimensions="385 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_2/x_cell_dofs</DataItem>
+          <DataItem Dimensions="384 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_2/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="Displacement_3" GridType="Uniform">
+        <Topology NumberOfElements="384" TopologyType="Tetrahedron" NodesPerElement="4">
+          <DataItem Dimensions="384 4" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_3/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XYZ">
+          <DataItem Dimensions="125 3" Format="HDF">u.h5:Displacement/Displacement_3/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="3.000000000000000e+00" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="CG" ElementDegree="2" ElementCell="tetrahedron" Name="Displacement" Center="Other" AttributeType="Vector">
+          <DataItem Dimensions="11520 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_3/cell_dofs</DataItem>
+          <DataItem Dimensions="2187 1" NumberType="Float" Format="HDF">u.h5:Displacement/Displacement_3/vector</DataItem>
+          <DataItem Dimensions="385 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_3/x_cell_dofs</DataItem>
+          <DataItem Dimensions="384 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_3/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="Displacement_4" GridType="Uniform">
+        <Topology NumberOfElements="384" TopologyType="Tetrahedron" NodesPerElement="4">
+          <DataItem Dimensions="384 4" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_4/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XYZ">
+          <DataItem Dimensions="125 3" Format="HDF">u.h5:Displacement/Displacement_4/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="4.000000000000000e+00" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="CG" ElementDegree="2" ElementCell="tetrahedron" Name="Displacement" Center="Other" AttributeType="Vector">
+          <DataItem Dimensions="11520 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_4/cell_dofs</DataItem>
+          <DataItem Dimensions="2187 1" NumberType="Float" Format="HDF">u.h5:Displacement/Displacement_4/vector</DataItem>
+          <DataItem Dimensions="385 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_4/x_cell_dofs</DataItem>
+          <DataItem Dimensions="384 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_4/cells</DataItem>
+        </Attribute>
+      </Grid>
+      <Grid Name="Displacement_5" GridType="Uniform">
+        <Topology NumberOfElements="384" TopologyType="Tetrahedron" NodesPerElement="4">
+          <DataItem Dimensions="384 4" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_5/mesh/topology</DataItem>
+        </Topology>
+        <Geometry GeometryType="XYZ">
+          <DataItem Dimensions="125 3" Format="HDF">u.h5:Displacement/Displacement_5/mesh/geometry</DataItem>
+        </Geometry>
+        <Time Value="5.000000000000000e+00" />
+        <Attribute ItemType="FiniteElementFunction" ElementFamily="CG" ElementDegree="2" ElementCell="tetrahedron" Name="Displacement" Center="Other" AttributeType="Vector">
+          <DataItem Dimensions="11520 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_5/cell_dofs</DataItem>
+          <DataItem Dimensions="2187 1" NumberType="Float" Format="HDF">u.h5:Displacement/Displacement_5/vector</DataItem>
+          <DataItem Dimensions="385 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_5/x_cell_dofs</DataItem>
+          <DataItem Dimensions="384 1" NumberType="UInt" Format="HDF">u.h5:Displacement/Displacement_5/cells</DataItem>
+        </Attribute>
+      </Grid>
+    </Grid>
+  </Domain>
+</Xdmf>

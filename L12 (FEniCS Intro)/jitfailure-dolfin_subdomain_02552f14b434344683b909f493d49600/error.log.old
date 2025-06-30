@@ -1,0 +1,4 @@
+/tmp/tmplctp7sza/dolfin_subdomain_02552f14b434344683b909f493d49600.cpp: In member function 'virtual bool dolfin::dolfin_subdomain_02552f14b434344683b909f493d49600::inside(Eigen::Ref<const Eigen::Matrix<double, -1, 1> >, bool) const':
+/tmp/tmplctp7sza/dolfin_subdomain_02552f14b434344683b909f493d49600.cpp:63:29: error: lvalue required as left operand of assignment
+   63 |          return on_boundary && x[0] = 0;
+      |                 ~~~~~~~~~~~~^~~~~~~
